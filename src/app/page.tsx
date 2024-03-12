@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSocket } from "./hooks/useSocket";
 import { useRouter } from "next/navigation";
 import { createAvatar } from "@dicebear/core";
 import { adventurer } from "@dicebear/collection";
+import { ReCaptchaV3Provider, initializeAppCheck } from "firebase/app-check";
+import { app } from "./database/firebase";
 
 const avatar = createAvatar(adventurer, {
   seed: "Felix",
@@ -18,6 +20,15 @@ export default function Home() {
   const { socket } = useSocket();
   const [isAdmin, setIsAdmin] = useState();
   const router = useRouter();
+
+  useEffect(() => {
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(
+        (process.env.NEXT_PUBLIC_APP_CHECK_KEY as string) || "",
+      ),
+      isTokenAutoRefreshEnabled: true,
+    });
+  }, []);
 
   const submitName = (event: any) => {
     const username = event.target.elements.username.value;

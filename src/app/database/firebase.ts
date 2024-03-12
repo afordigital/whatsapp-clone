@@ -15,18 +15,12 @@ import {
 } from "firebase/firestore";
 import { Message } from "../types";
 import { ReCaptchaV3Provider, initializeAppCheck } from "firebase/app-check";
+import { useEffect } from "react";
 
 const COLLECTION = "whatsapp";
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-
-// const appCheck = initializeAppCheck(app, {
-//   provider: new ReCaptchaV3Provider(
-//     (process.env.APP_CHECK_KEY as string) || "",
-//   ),
-//   isTokenAutoRefreshEnabled: true,
-// });
 
 /**
  * onSnapshot message DM, from "me" or from "user"
