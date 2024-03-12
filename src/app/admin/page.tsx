@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { Layout } from "../components/Layout";
-import { onMessageDM } from "../database/firebase";
+import { app, onMessageDM } from "../database/firebase";
 import { Message } from "../types";
+import { ReCaptchaV3Provider, initializeAppCheck } from "firebase/app-check";
 
 export default function AdminPage({
   params,
@@ -12,13 +13,22 @@ export default function AdminPage({
 }) {
   const [messages, setMessages] = useState<Message[]>([]);
 
-  //@ts-ignore
-  // const messagesGroupedByUser = Object.groupBy(
-  //   messages,
-  //   (message: Message) => message.to,
-  // );
+  useEffect(() => {
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(
+        (process.env.NEXT_PUBLIC_APP_CHECK_KEY as string) || "",
+      ),
+      isTokenAutoRefreshEnabled: true,
+    });
+  }, []);
 
-  // console.log(messagesGroupedByUser);
+  //@ts-ignore
+  const messagesGroupedByUser = Object.groupBy(
+    messages,
+    (message: Message) => message.to,
+  );
+
+  console.log(messagesGroupedByUser);
 
   useEffect(() => {
     const aux = [] as Message[];

@@ -21,15 +21,6 @@ export default function Home() {
   const [isAdmin, setIsAdmin] = useState();
   const router = useRouter();
 
-  useEffect(() => {
-    initializeAppCheck(app, {
-      provider: new ReCaptchaV3Provider(
-        (process.env.NEXT_PUBLIC_APP_CHECK_KEY as string) || "",
-      ),
-      isTokenAutoRefreshEnabled: true,
-    });
-  }, []);
-
   const submitName = (event: any) => {
     const username = event.target.elements.username.value;
     event.preventDefault();
