@@ -14,15 +14,6 @@ export default function AdminPage({
 }) {
   const [messages, setMessages] = useState<Message[]>([]);
 
-  useEffect(() => {
-    initializeAppCheck(app, {
-      provider: new ReCaptchaV3Provider(
-        (process.env.NEXT_PUBLIC_APP_CHECK_KEY as string) || "",
-      ),
-      isTokenAutoRefreshEnabled: true,
-    });
-  }, []);
-
   //@ts-ignore
   // const messagesGroupedByUser = Object.groupBy(
   //   messages,

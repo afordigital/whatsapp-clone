@@ -13,15 +13,6 @@ type LayoutProps = {
 };
 
 export const Layout = ({ username, messages }: LayoutProps) => {
-  useEffect(() => {
-    initializeAppCheck(app, {
-      provider: new ReCaptchaV3Provider(
-        (process.env.NEXT_PUBLIC_APP_CHECK_KEY as string) || "",
-      ),
-      isTokenAutoRefreshEnabled: true,
-    });
-  }, []);
-
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const message = event.target["message-input"].value;
