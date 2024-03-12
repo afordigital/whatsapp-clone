@@ -13,12 +13,12 @@ export default function AdminPage({
   const [messages, setMessages] = useState<Message[]>([]);
 
   //@ts-ignore
-  const messagesGroupedByUser = Object.groupBy(
-    messages,
-    (message: Message) => message.to,
-  );
+  // const messagesGroupedByUser = Object.groupBy(
+  //   messages,
+  //   (message: Message) => message.to,
+  // );
 
-  console.log(messagesGroupedByUser);
+  // console.log(messagesGroupedByUser);
 
   useEffect(() => {
     const aux = [] as Message[];

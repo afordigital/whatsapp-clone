@@ -5,7 +5,7 @@ import { Message } from "../types";
 
 type LayoutProps = {
   username: string;
-  messages: Message[];
+  messages?: Message[];
 };
 
 export const Layout = ({ username, messages }: LayoutProps) => {
@@ -34,7 +34,7 @@ export const Layout = ({ username, messages }: LayoutProps) => {
         <ChatHistory></ChatHistory>
         <div className="flex w-full max-w-full flex-col bg-[url('/imgs/bg.png')]">
           <div className="mb-4 ml-32 flex h-full flex-1 flex-col items-end justify-end gap-y-2 overflow-y-auto">
-            {messages.map((message) => {
+            {messages?.map((message) => {
               return (
                 <p
                   key={message.date.nanoseconds}

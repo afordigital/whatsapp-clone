@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import firebaseConfig from "./firebase.config" assert { type: "json" };
+import firebaseConfig from "./firebase.config.json";
 import {
   Timestamp,
   getFirestore,
@@ -21,12 +21,12 @@ const COLLECTION = "whatsapp";
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider(
-    (process.env.APP_CHECK_KEY as string) || "",
-  ),
-  isTokenAutoRefreshEnabled: true,
-});
+// const appCheck = initializeAppCheck(app, {
+//   provider: new ReCaptchaV3Provider(
+//     (process.env.APP_CHECK_KEY as string) || "",
+//   ),
+//   isTokenAutoRefreshEnabled: true,
+// });
 
 /**
  * onSnapshot message DM, from "me" or from "user"
