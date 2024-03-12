@@ -5,6 +5,7 @@ import { Layout } from "../components/Layout";
 import { app, onMessageDM } from "../database/firebase";
 import { Message } from "../types";
 import { groupBy } from "../utils/groupBy";
+import { ReCaptchaV3Provider, initializeAppCheck } from "firebase/app-check";
 
 export default function AdminPage({
   params,
@@ -12,6 +13,15 @@ export default function AdminPage({
   params: { username: string };
 }) {
   const [messages, setMessages] = useState<Message[]>([]);
+
+  useEffect(() => {
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(
+        (process.env.NEXT_PUBLIC_APP_CHECK_KEY as string) || "",
+      ),
+      isTokenAutoRefreshEnabled: true,
+    });
+  }, []);
 
   //@ts-ignore
   // const messagesGroupedByUser = Object.groupBy(

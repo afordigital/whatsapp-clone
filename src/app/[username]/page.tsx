@@ -12,6 +12,15 @@ import { ReCaptchaV3Provider, initializeAppCheck } from "firebase/app-check";
 
 export default function UserPage({ params }: { params: { username: string } }) {
   useEffect(() => {
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(
+        (process.env.NEXT_PUBLIC_APP_CHECK_KEY as string) || "",
+      ),
+      isTokenAutoRefreshEnabled: true,
+    });
+  }, []);
+
+  useEffect(() => {
     const handler = onMessageDM({
       me: "aforcita",
       // user: "other",

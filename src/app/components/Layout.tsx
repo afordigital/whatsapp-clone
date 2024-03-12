@@ -2,8 +2,10 @@
 
 import { ChatHistory } from "./ChatHistory";
 
-import { sendMessage } from "../database/firebase";
+import { app, sendMessage } from "../database/firebase";
 import { Message } from "../types";
+import { ReCaptchaV3Provider, initializeAppCheck } from "firebase/app-check";
+import { useEffect } from "react";
 
 type LayoutProps = {
   username: string;
@@ -11,6 +13,15 @@ type LayoutProps = {
 };
 
 export const Layout = ({ username, messages }: LayoutProps) => {
+  useEffect(() => {
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(
+        (process.env.NEXT_PUBLIC_APP_CHECK_KEY as string) || "",
+      ),
+      isTokenAutoRefreshEnabled: true,
+    });
+  }, []);
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const message = event.target["message-input"].value;
