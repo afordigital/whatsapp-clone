@@ -1,3 +1,5 @@
+"use client";
+
 import { ChatHistory } from "./ChatHistory";
 
 import { sendMessage } from "../database/firebase";

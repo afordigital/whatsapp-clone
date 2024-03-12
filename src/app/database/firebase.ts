@@ -1,3 +1,5 @@
+"use client";
+
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebase.config.json";
 import {
@@ -10,8 +12,6 @@ import {
   orderBy,
   onSnapshot,
   or,
-  and,
-  DocumentData,
 } from "firebase/firestore";
 import { Message } from "../types";
 import { ReCaptchaV3Provider, initializeAppCheck } from "firebase/app-check";
