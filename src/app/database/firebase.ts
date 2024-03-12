@@ -22,6 +22,13 @@ const COLLECTION = "whatsapp";
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider(
+    (process.env.NEXT_PUBLIC_APP_CHECK_KEY as string) || "",
+  ),
+  isTokenAutoRefreshEnabled: true,
+});
+
 /**
  * onSnapshot message DM, from "me" or from "user"
  *  Message sent from me to user
