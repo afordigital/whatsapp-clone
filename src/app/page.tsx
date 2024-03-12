@@ -1,8 +1,18 @@
 "use client";
 import { useState } from "react";
 import { useSocket } from "./hooks/useSocket";
-import { UserType } from "./types";
 import { useRouter } from "next/navigation";
+import { createAvatar } from "@dicebear/core";
+import { adventurer } from "@dicebear/collection";
+
+const avatar = createAvatar(adventurer, {
+  seed: "Felix",
+  flip: true,
+  backgroundColor: ["b6e3f4", "c0aede", "d1d4f9"],
+  // ... options
+});
+
+const svg = avatar.toDataUriSync();
 
 export default function Home() {
   const { socket } = useSocket();
@@ -22,9 +32,12 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="flex flex-col items-center p-24">
       <form onSubmit={submitName} className="flex flex-col text-center">
         <label>Escribe tu nombre</label>
+        {/* <img src={svg} /> */}
+        {/* <div dangerouslySetInnerHTML={{ __html: svg }}></div> */}
+        <img src={svg} width={100} height={100}></img>
         <input name="username" className="mt-4 rounded-md p-2 text-black" />
         <button className="mt-8 rounded-md bg-white p-2 text-black hover:bg-slate-200">
           Enviar
