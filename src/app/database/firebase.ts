@@ -52,7 +52,7 @@ export const onMessageDM = ({
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     querySnapshot.docChanges().forEach((change) => {
       if (change.type === "added") {
-        onMessage(change.doc.data());
+        onMessage(change.doc.data() as any);
       }
     });
   });
