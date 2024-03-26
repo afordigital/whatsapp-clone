@@ -57,6 +57,7 @@ export const Layout = ({ username, messages }: LayoutProps) => {
                 Enviar
               </button>
             </form>
+            <p>Hola</p>
           </div>
         </div>
       </div>
